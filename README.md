@@ -1,2 +1,2 @@
 # korn-shell
-bill deployed the changes
+bulk deployed the changes
