@@ -1,0 +1,27 @@
+root@BINSRVNIM01:/#  vi pne.ksh
+#!/bin/ksh
+
+# Read server list from server.txt
+servers_file="server.txt"
+log_file="execution_log.txt"
+
+if [ ! -f "$servers_file" ]; then
+    echo "Error: $servers_file not found."
+    exit 1
+fi
+
+# Clear existing log file
+> "$log_file"
+
+# Loop through servers and execute the script remotely
+while IFS= read -r server; do
+    echo "Executing script on $server..."
+ssh "$server" 'bash -s' < /bigfixhe.sh
+    if [ $? -eq 0 ]; then
+        echo "Script executed successfully on $server." | tee -a "$log_file"
+    else
+        echo "Error executing script on $server." | tee -a "$log_file"
+    fi
+done < "$servers_file"
+
+echo "Execution log saved to $log_file."

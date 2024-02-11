@@ -1,0 +1,8 @@
+vi bigfixhe.sh
+
+2012    vi pne.ksh
+2013    vi pne.ksh
+
+
+vi server.txt
+2017    bash +x pne.ksh
